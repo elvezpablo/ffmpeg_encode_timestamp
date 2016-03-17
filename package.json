@@ -1,0 +1,32 @@
+{
+  "name": "ffmpeg_encode_timestamp",
+  "version": "1.0.0",
+  "description": "FFMPEG overlay filters for images, text and video ",
+  "main": "encode_timestamp.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "should": "^8.2.2"
+  },
+  "devDependencies": {
+    "mocha": "^2.4.5"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elvezpablo/ffmpeg_encode_timestamp.git"
+  },
+  "keywords": [
+    "FFPMEG",
+    "filters"
+  ],
+  "author": "Paul Rangel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/elvezpablo/ffmpeg_encode_timestamp/issues"
+  },
+  "homepage": "https://github.com/elvezpablo/ffmpeg_encode_timestamp#readme"
+}
