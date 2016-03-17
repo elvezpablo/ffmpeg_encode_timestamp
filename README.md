@@ -1,8 +1,35 @@
-# FFMPEG Overlays Filters 
+# FFmpeg Overlays Filters 
 
-Two js functions to compose ffmpeg commands for embedding a logo and text onto a source video. 
+Two js functions which compose ffmpeg commands for embedding a logo and text onto a source video. 
+
+## FFMPEG Dependencies 
+
+FFmpeg does not support custom fonts by default and must be compiled with `libfreetype`. It appears the version on Heroku has it installed. Here's a site that has additional builds for servers (http://johnvansickle.com/ffmpeg/).
+
+```
+libfreetype
+```
+
+## Usage
+
+```sh
+node ./encode_timestamp.js 
+```
+
+
+## Speed Timer Command
+
+For the speed competitions this command will show a logo from the start of the video until the start of the countdown after which it will show the countdown in blue text until the competition is started  
+
  
+```javascript
+_getSpeedTimerCommand(timerStartsAt, duration, input, output);
+```
 
+
+```javascript
+_getCountdownTimerCommand(timerStartsAt, duration, input, output);
+```
 
 
 ## References 
