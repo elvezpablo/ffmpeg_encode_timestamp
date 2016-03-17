@@ -1,6 +1,7 @@
 /*
 
 http://ffmpeg.gusari.org/viewtopic.php?f=11&t=769
+https://ffmpeg.org/ffmpeg-filters.html
 
 */	
 var DrawText = require("./lib/DrawText");
