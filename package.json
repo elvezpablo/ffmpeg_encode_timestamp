@@ -14,6 +14,7 @@
     "should": "^8.2.2"
   },
   "scripts": {
+    "start" : "node ./encode_timestamp.js",
     "test": "mocha"
   },
   "repository": {

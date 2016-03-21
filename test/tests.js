@@ -8,7 +8,7 @@ describe("TimeUtils", function() {
         console.log(TimeUtils.formatTime(181.5565,true))
     })
 
-})
+});
 
 describe("TimeWindows", function() {
 
