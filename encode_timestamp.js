@@ -16,36 +16,35 @@ var _getDevFilename = function() {
 	return "_"+d.getMinutes()+"_"+d.getSeconds()+".mp4";
 };
 
-var _getSpeedTimerCommand = function(timerStartsAt, duration, input, output) {
+var _getSpeedTimerCommand = function(timerStartsAt, duration, input, logoPath, fontPath, output) {
 
 	var timeWindows = new TimeWindows(timerStartsAt, duration);
 
-	var logo = new DrawLogo("./logo.png").atTimeWindow(timeWindows.logo());
+	var logo = new DrawLogo(logoPath).atTimeWindow(timeWindows.logo());
 
 	var dt1 = new DrawText()
 	.setTextStatic(TimeUtils.formatTime(Config.WARM_UP_DURATION, true)) // TODO : needs to be formatted with leading 0s
 	.atTimeWindow(timeWindows.logoToWarmUp())
 	.fontFormat(Config.FONT_SIZE,Config.FONT_BLUE)
-	.fontFile(Config.FONT_PATH);
+	.fontFile(fontPath);
 
 	var dt2 = new DrawText()
 	.countdown(timeWindows.warmUp()[0],Config.WARM_UP_DURATION)
 	.atTimeWindow(timeWindows.warmUp())
 	.fontFormat(Config.FONT_SIZE,Config.FONT_BLUE)
-	.fontFile(Config.FONT_PATH);
+	.fontFile(fontPath);
 
 	var dt4 = new DrawText()
 	.setTextTimeOffset(timeWindows.competition()[0])
 	.atTimeWindow(timeWindows.competition())
 	.fontFormat(Config.FONT_SIZE,Config.FONT_RED)
-	.fontFile(Config.FONT_PATH);
-
+	.fontFile(fontPath);
 
 	var dt3 = new DrawText()
-	.setTextStatic(TimeUtils.formatTime(duration/1000)) // TODO : needs to be formatted with leading 0s
+	.setTextStatic(TimeUtils.formatTime(duration/1000))
 	.atTimeWindow(timeWindows.postCompetition())
 	.fontFormat(Config.FONT_SIZE,Config.FONT_RED)
-	.fontFile(Config.FONT_PATH);
+	.fontFile(fontPath);
 
 	var encode = new Encode(input, output, logo);
 	encode.addTextFilter(dt1.get());
@@ -54,39 +53,39 @@ var _getSpeedTimerCommand = function(timerStartsAt, duration, input, output) {
 	encode.addTextFilter(dt4.get());
 
 	return encode.get();
-}
+};
 
-var _getCountdownTimerCommand = function(timerStartsAt, duration, input, output) {
+var _getCountdownTimerCommand = function(timerStartsAt, duration, input, logoPath, fontPath, output) {
 	if(duration%10 === 0) {		
 		duration += 500
 	}
 	var timeWindows = new TimeWindows(timerStartsAt, duration);
 
-	var logo = new DrawLogo("./logo.png").atTimeWindow(timeWindows.logo());
+	var logo = new DrawLogo(logoPath).atTimeWindow(timeWindows.logo());
 
 	var dt1 = new DrawText()
-	.setTextStatic(TimeUtils.formatTime(Config.WARM_UP_DURATION, true)) // TODO : needs to be formatted with leading 0s
+	.setTextStatic(TimeUtils.formatTime(Config.WARM_UP_DURATION, true))
 	.atTimeWindow(timeWindows.logoToWarmUp())
 	.fontFormat(Config.FONT_SIZE,Config.FONT_BLUE)
-	.fontFile(Config.FONT_PATH);
+	.fontFile(fontPath);
 
 	var dt2 = new DrawText()
 	.countdown(timeWindows.warmUp()[0],Config.WARM_UP_DURATION)
 	.atTimeWindow(timeWindows.warmUp())
 	.fontFormat(Config.FONT_SIZE,Config.FONT_BLUE)
-	.fontFile(Config.FONT_PATH);
+	.fontFile(fontPath);
 
 	var dt4 = new DrawText()
 	.countdown(timeWindows.competition()[0],duration/1000)
 	.atTimeWindow(timeWindows.competition())
 	.fontFormat(Config.FONT_SIZE,Config.FONT_RED)
-	.fontFile(Config.FONT_PATH);
+	.fontFile(fontPath);
 
 	var dt3 = new DrawText()
-	.setTextStatic(TimeUtils.formatTime(0, true)) // TODO : needs to be formatted with leading 0s
+	.setTextStatic(TimeUtils.formatTime(0, true))
 	.atTimeWindow(timeWindows.postCompetition())
 	.fontFormat(Config.FONT_SIZE,Config.FONT_RED)
-	.fontFile(Config.FONT_PATH);
+	.fontFile(fontPath);
 
 	var encode = new Encode(input, output, logo);
 	encode.addTextFilter(dt1.get());
@@ -99,5 +98,9 @@ var _getCountdownTimerCommand = function(timerStartsAt, duration, input, output)
 
 var input = "./input/GOAT.MOV";
 var output = "./output/"+_getDevFilename();
+var logoPath = "./logo.png";
+var fontPath = "./fonts/digital-7-mono.ttf";
 
-console.log(_getCountdownTimerCommand(2000,6000, input, output));
+console.log(_getCountdownTimerCommand(2000,6000, input, logoPath, fontPath, "_timer_"+output));
+console.log("--------");
+console.log(_getSpeedTimerCommand(2000,6000, input, logoPath, fontPath, "_speed_"+output));
