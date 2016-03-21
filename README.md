@@ -1,21 +1,22 @@
 # FFmpeg Overlays Filters 
 
-Two js functions which compose ffmpeg commands for embedding a logo and text onto a source video. 
+Two js functions which compose ffmpeg commands for embedding a logo and text onto a source video. The parameters. 
+```
+timerStartsAt = time the countdown starts in milisecondes 
+duration = time of the competition from end of countdown to press of stop button in miliseconds
+input = input file path 
+logoPath = path to the logo overlay shown up to the countdown timer start time
+fontPath = path to the font used to dispay the countdown times
+output = output file path
+```
 
 ## FFMPEG Dependencies 
 
-FFmpeg does not support custom fonts by default and must be compiled with `libfreetype`. It appears the version on Heroku has it installed. Here's a site that has additional builds for servers (http://johnvansickle.com/ffmpeg/).
+FFmpeg does not support custom fonts by default and must be compiled with `libfreetype`. It current version on Heroku has it installed. Here's a site that has additional builds for servers (http://johnvansickle.com/ffmpeg/) if we need to upgrade for whatever reason.
 
 ```
 libfreetype
 ```
-
-## Usage
-
-```sh
-node ./encode_timestamp.js 
-```
-
 
 ## Speed Timer Command
 
@@ -23,12 +24,26 @@ For the speed competitions this command will show a logo from the start of the v
 
  
 ```javascript
-_getSpeedTimerCommand(timerStartsAt, duration, input, output);
+_getSpeedTimerCommand(timerStartsAt, duration, input, logoPath, fontPath, output);
 ```
+
+### Demo
+
+```sh
+node ./getSpeedTimerCommand.js 
+```
+
+## Countdown Timer Command
 
 
 ```javascript
-_getCountdownTimerCommand(timerStartsAt, duration, input, output);
+_getCountdownTimerCommand(timerStartsAt, duration, input, logoPath, fontPath, output);
+```
+
+### Demo
+
+```sh
+node ./getSpeedTimerCommand.js 
 ```
 
 
